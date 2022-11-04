@@ -1,0 +1,81 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": [],
+      "authorship_tag": "ABX9TyN01Gwkcq0JP3wu4GW5VeFq",
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/DavidJ244/PROGCOM-B2/blob/main/CajaR\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "id": "f_7ACJqWtsZr"
+      },
+      "outputs": [],
+      "source": [
+        "from tkinter import *\n",
+        "from tkinter import ttk\n",
+        "class market:\n",
+        "\tdef __init__(self,a):\n",
+        "\t\tself.a = a\n",
+        "\t\tself.a.configure(bg='violet')\n",
+        "\t\tself.productos = (\"Yogur - $400\",\"Huevos - $500\",\"Libra carne - $12500\",\"Chocolate - $600\",\"Cafe - $2000\",\"Arepa - $1200\",\"Queso - $6500\",\"Harina - $3200\",\"Mantequilla - $3000\",\"Sal - $1500\",\"Aceite - $16000\",\"Azucar - $3500\", \"Cebolla - $2200\")\n",
+        "\t\tself.b = IntVar()\n",
+        "\t\tself.c = IntVar()\n",
+        "\t\tself.total = 0\n",
+        "\t\tself.d()\n",
+        "\tdef d(self):\n",
+        "\t\tself.a.title(\"Supermercado\")\n",
+        "\t\tself.a.geometry(\"650x450\")\n",
+        "\t\tLabel(self.a,text=\"Producto: \").place(x=10,y=10)\n",
+        "\t\tLabel(self.a,text=\"Cantidad: \").place(x=10,y=60)\n",
+        "\t\tLabel(self.a,text=\"Total: \").place(x=470,y=400)\n",
+        "\t\tself.combo = ttk.Combobox(self.a,state=\"\")\n",
+        "\t\tself.combo.place(x=10,y=35)\n",
+        "\t\tself.combo[\"values\"]=self.productos\n",
+        "\t\tself.combo.current(0)\n",
+        "\t\tEntry(self.a,textvariable=self.b).place(x=10,y=85)\n",
+        "\t\tEntry(self.a,textvariable=self.c).place(x=520,y=400)\n",
+        "\t\tButton(self.a,text=\"Agregar\",command=self.agregarProducto).place(x=10,y=110)\n",
+        "\t\tself.tabla = ttk.Treeview(self.a,columns=(\"Cantidad\",\"Subtotal\"))\n",
+        "\t\tself.tabla.heading(\"#0\",text=\"Producto\")\n",
+        "\t\tself.tabla.heading(\"Cantidad\",text=\"Cantidad\")\n",
+        "\t\tself.tabla.heading(\"Subtotal\",text=\"Subtotal\")\n",
+        "\t\tself.tabla.place(x=10,y=150)\n",
+        "\tdef agregarProducto(self):\n",
+        "\t\ttexto = self.combo.get()  \n",
+        "\t\tdatos = texto.split(\"-$\")\n",
+        "\t\tproducto = datos[0]\n",
+        "\t\tprecio = datos[1]\n",
+        "\t\tcantidad = self.b.get()\n",
+        "\t\tsubtotal = int(precio)*int(cantidad)\n",
+        "\t\tself.tabla.insert(\"\",END,text=producto,values=(cantidad,\"$\"+str(subtotal)))\n",
+        "\t\tself.total = self.total + subtotal\n",
+        "\t\tself.c.set(\"$\"+str(self.total))\n",
+        "obj = market(Tk())\n",
+        "obj.a.mainloop()"
+      ]
+    }
+  ]
+}
